@@ -29,12 +29,16 @@ Then edit the new flake to include the desired packages/environmental variables
 and to pin the dependencies (one of the whole reasons to use flakes). 
 
 E.g., altering line #6 in [./rlang/flake.nix](./rland/flake.nix) from
-'''nix
+
+```nix
 nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-'''
+```
+
 to 
-'''nix
-nixpkgs.url = "github:nixos/nixpkgs/github:nixos/nixpkgs/nixos-25.05";
-'''
+
+```nix
+nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+```
+
 
 and then proceed with the analysis or development!
