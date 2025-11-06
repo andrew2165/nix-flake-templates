@@ -22,7 +22,7 @@ Here is an example workflow for a new RStudio-based analysis project:
 mkdir new_rlang_analysis
 cd new_rlang_analysis
 git init
-nix flake init -t github:andrew2165/r-analysis-env#rlang
+nix flake init -t github:andrew2165/nix-flake-templates#rlang
 ```
 
 Then edit the new flake to include the desired packages/environmental variables
