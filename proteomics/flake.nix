@@ -6,35 +6,63 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
-  outputs = { self , nixpkgs , ... }: let
-    # system should match the system you are running on
-    # system = "x86_64-linux";
-    system = "aarch64-darwin";
-  in {
-    devShells."${system}".default = let
+  outputs =
+    { self, nixpkgs, ... }:
+    let
+      # system should match the system you are running on
+      # system = "x86_64-linux";
+      supportedSystems = [
+        "aarch64-darwin"
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      pkgs = import nixpkgs {
-        inherit system;
-      };
+      # FragPipe Version
+      # (assumes they keep versioning and naming consistent)
+      version = "23.1";
+    in
+    {
+      devShells = forAllSystems (
+        system:
+        let
+          #."${system}".default = let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
+          # fragpipeSrc = pkgs.fetchFromGitHub {
+          #   owner = "Nesvilab";
+          #   repo = "FragPipe";
+          #   rev = "d8bf745";
+          #   sha256 = "0000000000000000000000000000000000000000000000000000";
+          # };
+          fragpipeSrc = pkgs.fetchzip {
+            # URL pattern for the release asset:
+            # https://github.com/Nesvilab/FragPipe/releases/download/23.1/FragPipe-23.1-linux.zip
+            url = "https://github.com/Nesvilab/FragPipe/releases/download/${version}/FragPipe-${version}-linux.zip";
+            # Put the correct hash here (see instructions below to prefetch).
+            sha256 = "sha256-IIG8WvcpUCChpHZwVDbiMkwWIFrbElt4fagOBeLU560=";
+          };
 
-      fragpipeSrc = pkgs.fetchFromGitHub {
-        owner = "Nesvilab";
-        repo = "philosopher";
-        rev = "v5.1.0";
-        sha256 = "sha256-nLSTDHJCNFEQi4O01plVbR361B943pCt9g1sZlYx0gA=";
-      };
+          # Path to the starter shell script
+          fragpipeShellScript = "${fragpipeSrc}/bin/fragpipe";
 
-      # Path to the starter shell script
-      fragpipeShellScript = "${fragpipeSrc}/FragPipe-GUI/start-scripts/fragpipe.sh";
-      
-    in pkgs.mkShell {
-        #packages = with pkgs; [ ];
+        in
+        {
+          default = pkgs.mkShell {
+            #packages = with pkgs; [ ];
+            packages = with pkgs; [
+              openjdk
+              unzip
+            ];
 
-        shellHook = ''
-        alias fragpipe="${fragpipeShellScript}";
-        echo "---- Proteomics Analysis Shell ----"
-        echo "Aliased 'fragpipe' to ${fragpipeShellScript}"
-        '';
+            shellHook = ''
+              alias fragpipe="${fragpipeShellScript}";
+              echo "---- Proteomics Analysis Shell ----"
+              echo "Aliased 'fragpipe' to ${fragpipeShellScript}"
+            '';
+          };
+        }
+      );
     };
-  };
 }
