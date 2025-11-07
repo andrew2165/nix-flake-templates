@@ -42,6 +42,7 @@
             packages = with pkgs; [
               openjdk
               unzip
+              python312 # and then any other python packages required
               # writeShellScriptBin is from pkgs itself, no extra package required
               (pkgs.writeShellScriptBin "fragpipe" ''
                 set -euo pipefail
@@ -52,7 +53,7 @@
 
                 # Copy FragPipe files to the temporary directory
                 cp -a "${fragpipeSrc}/." "$RUNTIME_DIR/"
-                
+
                 chmod -R u+rwX "$RUNTIME_DIR"
 
                 # Run FragPipe from the ephemeral copy, forwarding all args
