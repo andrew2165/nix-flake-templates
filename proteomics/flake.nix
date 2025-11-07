@@ -52,6 +52,8 @@
 
                 # Copy FragPipe files to the temporary directory
                 cp -a "${fragpipeSrc}/." "$RUNTIME_DIR/"
+                
+                chmod -R u+rwX "$RUNTIME_DIR"
 
                 # Run FragPipe from the ephemeral copy, forwarding all args
                 exec "$RUNTIME_DIR/bin/fragpipe" "$@"
