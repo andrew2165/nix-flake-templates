@@ -43,35 +43,17 @@
               openjdk
               unzip
               # writeShellScriptBin is from pkgs itself, no extra package required
-              (writeShellScriptBin "fragpipe" ''
-                #!/usr/bin/env bash
+              (pkgs.writeShellScriptBin "fragpipe" ''
                 set -euo pipefail
 
-                # Respect XDG dirs or fall back to sane defaults
-                : "${XDG_DATA_HOME:=$HOME/.local/share}"
-                : "${XDG_CONFIG_HOME:=$HOME/.config}"
-                : "${XDG_CACHE_HOME:=$HOME/.cache}"
+                # Create a unique temporary directory in /tmp for this FragPipe session
+                RUNTIME_DIR=$(mktemp -d /tmp/fragpipe-XXXXXXXX)
+                trap 'rm -rf "$RUNTIME_DIR"' EXIT
 
-                # Prepare ephemeral runtime dir under TMP; per-run copy
-                TMPROOT="${TMPDIR:-/tmp}/fragpipe-${USER}"
-                mkdir -p "$TMPROOT"
-                RUNTIME_DIR="$(mktemp -d "$TMPROOT/run-XXXXXX")"
+                # Copy FragPipe files to the temporary directory
+                cp -a "${fragpipeSrc}/." "$RUNTIME_DIR/"
 
-                # Attempt copy with reflinks when supported (faster / space-efficient), fall back to plain copy
-                if ! (cp --reflink=auto -a "${fragpipeSrc}/." "$RUNTIME_DIR/" 2>/dev/null); then
-                  cp -a "${fragpipeSrc}/." "$RUNTIME_DIR/"
-                fi
-
-                # Ensure some writable dirs and sensible Java tmpdir
-                mkdir -p "$XDG_CACHE_HOME/fragpipe" "$XDG_CONFIG_HOME/FragPipe" "$RUNTIME_DIR/tmp"
-                export JAVA_HOME="${pkgs.openjdk}"
-                export PATH="${pkgs.openjdk}/bin:$PATH"
-                export JAVA_OPTS="${JAVA_OPTS:-} -Djava.io.tmpdir=$RUNTIME_DIR/tmp"
-
-                # Upstream-friendly env var that some pipelines check
-                export FRAGPIPE_HOME="$RUNTIME_DIR"
-
-                # Exec the FragPipe binary from the ephemeral copy
+                # Run FragPipe from the ephemeral copy, forwarding all args
                 exec "$RUNTIME_DIR/bin/fragpipe" "$@"
               '')
             ];
