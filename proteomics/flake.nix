@@ -8,7 +8,12 @@
   };
 
   outputs =
-    { self, nixpkgs, rlangFlake, ... }:
+    {
+      self,
+      nixpkgs,
+      rlangFlake,
+      ...
+    }:
     let
 
       supportedSystems = [
@@ -26,7 +31,7 @@
       devShells = forAllSystems (
         system:
         let
-          
+
           pkgs = import nixpkgs {
             inherit system;
           };
@@ -44,13 +49,13 @@
               openjdk
               unzip
               python312 # and then any other python packages required
-              (rWrapper.override{ packages = [rPackages.rstudio_prefs];})
+              (rWrapper.override { packages = [ rPackages.rstudio_prefs ]; })
               curlFull
               rPackages.curl
-              (rstudioWrapper.override{ 
-                packages = with rPackages; [ 
-                  tidyverse 
-                  drc 
+              (rstudioWrapper.override {
+                packages = with rPackages; [
+                  tidyverse
+                  drc
                   rstudio_prefs
                 ]; # add new R packages (from nix) here to get tied in
               })
