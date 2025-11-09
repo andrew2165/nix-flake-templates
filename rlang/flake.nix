@@ -18,19 +18,25 @@
     in pkgs.mkShell {
       # create an environment with required R Packages
       packages = with pkgs; [
-	(rWrapper.override{ packages = [rPackages.rstudio_prefs];})
+	      (rWrapper.override{ packages = [rPackages.rstudio_prefs];})
         curlFull
         rPackages.curl
         (rstudioWrapper.override{ 
-          packages = with rPackages; [ tidyverse drc rstudio_prefs]; # add new R packages (from nix) here to get tied in
-          }
-        )
+          packages = with rPackages; [ 
+            tidyverse 
+            drc 
+            rstudio_prefs
+          ]; # add new R packages (from nix) here to get tied in
+        })
       ];
 
+      # Also output rstudioPrefs for use in other flakes
+      rstudioPrefs = ./rstudio-prefs.json
+
       shellHook = ''
-	R -e "require(rstudio.prefs); rstudio_config_path('./rstudio-prefs.json');"
+	      R -e "require(rstudio.prefs); rstudio_config_path('./rstudio-prefs.json');"
         echo "RStudio Analysis Shell - ${system}"
-	rstudio
+	      rstudio
       '';
     };
   };

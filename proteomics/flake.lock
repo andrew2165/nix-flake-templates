@@ -16,9 +16,46 @@
         "type": "github"
       }
     },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1741010256,
+        "narHash": "sha256-WZNlK/KX7Sni0RyqLSqLPbK8k08Kq7H7RijPJbq9KHM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "ba487dbc9d04e0634c64e3b1f0d25839a0a68246",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "rlangFlake": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "dir": "rlang",
+        "lastModified": 1762494198,
+        "narHash": "sha256-5DJWhryni5kOlshbP45syqe+6Elqy/2VuNUtEsrvvec=",
+        "owner": "andrew2165",
+        "repo": "nix-flake-templates",
+        "rev": "e6617ab2bb0744b22e7f5e7520d2f3b38024bd45",
+        "type": "github"
+      },
+      "original": {
+        "dir": "rlang",
+        "owner": "andrew2165",
+        "repo": "nix-flake-templates",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "rlangFlake": "rlangFlake"
       }
     }
   },

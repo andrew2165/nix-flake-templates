@@ -4,10 +4,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    rlangFlake.url = "github:andrew2165/nix-flake-templates?dir=rlang";
   };
 
   outputs =
-    { self, nixpkgs, ... }:
+    { self, nixpkgs, rlangFlake, ... }:
     let
 
       supportedSystems = [
@@ -43,6 +44,16 @@
               openjdk
               unzip
               python312 # and then any other python packages required
+              (rWrapper.override{ packages = [rPackages.rstudio_prefs];})
+              curlFull
+              rPackages.curl
+              (rstudioWrapper.override{ 
+                packages = with rPackages; [ 
+                  tidyverse 
+                  drc 
+                  rstudio_prefs
+                ]; # add new R packages (from nix) here to get tied in
+              })
               # writeShellScriptBin is from pkgs itself, no extra package required
               (pkgs.writeShellScriptBin "fragpipe" ''
                 set -euo pipefail
@@ -62,6 +73,8 @@
             ];
 
             shellHook = ''
+              R -e "require(rstudio.prefs); rstudio_config_path('${rlangFlake.rstudioPrefs}');"
+
               echo "---- Proteomics Analysis Shell ----"
               echo "Wrapper 'fragpipe' available: copies FragPipe to a temporary writable dir and runs it."
             '';
