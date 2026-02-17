@@ -34,6 +34,7 @@
                   tidyverse
                   drc
                   rstudio_prefs
+                  MSstats
                 ]; # add new R packages (from nix) here to get tied in
               })
             ];
