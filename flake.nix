@@ -13,6 +13,10 @@
           path = ./proteomics;
           description = "A simple starter proteomics analysis environment";
         };
+        msstatsshiny = {
+          path = ./msstatsshiny;
+          description = "A simple starter MSstats analysis environment with MSstatsShiny";
+        };
       };
     in
     {

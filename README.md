@@ -42,3 +42,22 @@ nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
 
 and then proceed with the analysis or development!
+
+
+## MSstatsShiny
+
+Create an MSstats R environment with the MSstatsShiny web app:
+
+```bash
+mkdir new_msstats_analysis
+cd new_msstats_analysis
+git init
+nix flake init -t github:andrew2165/nix-flake-templates#msstatsshiny
+git add flake.nix flake.lock
+nix run
+```
+
+Open http://127.0.0.1:3838. Use `nix develop` for a shell containing R and
+`msstats-shiny`. Dependencies use stable `nixos-26.05`, with the exact revision
+pinned in the template's lock file. See [the template README](./msstatsshiny/README.md)
+for R usage, configuration, and verification details.
