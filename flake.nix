@@ -17,6 +17,10 @@
           path = ./msstatsshiny;
           description = "A simple starter MSstats analysis environment with MSstatsShiny";
         };
+        msstatsshiny-ap = {
+          path = ./msstatsshiny-ap;
+          description = "MSstats Affinity Profiling with MSstatsShinyAP";
+        };
       };
     in
     {

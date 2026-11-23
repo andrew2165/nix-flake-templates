@@ -1,0 +1,81 @@
+{
+  "nodes": {
+    "msstats-ap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794503052,
+        "narHash": "sha256-oJgS6BmuXw2+52TMjnX69lsjNL+kDANFL+MqAdzomKg=",
+        "owner": "andrew2165",
+        "repo": "MSstats-AP",
+        "rev": "757cde8bb22d5c37356a1aa52bc48c69b929211a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andrew2165",
+        "repo": "MSstats-AP",
+        "rev": "757cde8bb22d5c37356a1aa52bc48c69b929211a",
+        "type": "github"
+      }
+    },
+    "msstats-shiny-ap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794526531,
+        "narHash": "sha256-QfpHMfFOg4egqRDXMO6yebPxtXk8/42u9ezA0MDE6hw=",
+        "owner": "andrew2165",
+        "repo": "MSstatsShiny-AP",
+        "rev": "fdbaca4f54bd1ce174b216e1a21784dcf1739351",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andrew2165",
+        "repo": "MSstatsShiny-AP",
+        "rev": "fdbaca4f54bd1ce174b216e1a21784dcf1739351",
+        "type": "github"
+      }
+    },
+    "msstats-tmt-ap": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794503053,
+        "narHash": "sha256-TOnb/s3puYYoKw1FnFIQiBU8qCSTqCgGAc+3RPpI+Wk=",
+        "owner": "andrew2165",
+        "repo": "MSstatsTMT-AP",
+        "rev": "b9a30b12c4f951f805496e2b43661b7872f0b801",
+        "type": "github"
+      },
+      "original": {
+        "owner": "andrew2165",
+        "repo": "MSstatsTMT-AP",
+        "rev": "b9a30b12c4f951f805496e2b43661b7872f0b801",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1793526781,
+        "narHash": "sha256-2Cxxgpz1+cRgKZJFi12/9LG3aIBN66f2RvFs34Oj/A0=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9bb52223f4f6a0cc606fd0852d8784f896c137d5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-26.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "msstats-ap": "msstats-ap",
+        "msstats-shiny-ap": "msstats-shiny-ap",
+        "msstats-tmt-ap": "msstats-tmt-ap",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
