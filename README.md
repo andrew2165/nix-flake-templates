@@ -61,3 +61,21 @@ Open http://127.0.0.1:3838. Use `nix develop` for a shell containing R and
 `msstats-shiny`. Dependencies use stable `nixos-26.05`, with the exact revision
 pinned in the template's lock file. See [the template README](./msstatsshiny/README.md)
 for R usage, configuration, and verification details.
+
+## MSstatsShiny-AP
+
+Use the `msstatsshiny-ap` template for Affinity Profiling. It pins three GitHub
+forks by commit. **MSstatsShiny-AP** launches the app, **MSstats-AP** handles
+label-free analysis, and **MSstatsTMT-AP** handles TMT analysis.
+
+```bash
+mkdir new_msstats_ap_analysis
+cd new_msstats_ap_analysis
+git init
+nix flake init -t github:andrew2165/nix-flake-templates#msstatsshiny-ap
+git add flake.nix flake.lock
+nix run
+```
+
+See the [MSstatsShiny-AP template README](./msstatsshiny-ap/README.md) for
+the installed R package names, exact commits, and launch options.

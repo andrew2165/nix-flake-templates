@@ -1,12 +1,15 @@
-# MSstats Affinity Profiling
+# MSstatsShiny-AP
 
-This flake follows the [MSstatsShiny analysis template](https://github.com/andrew2165/nix-flake-templates/tree/11ea872765d017e822ab66595652ab184f036ca1/msstatsshiny). It keeps the template's stable nixpkgs 26.05 lock and adds three GitHub source inputs pinned to full commits.
+This template launches the **MSstatsShiny-AP** app for Affinity Profiling with
+the **MSstats-AP** and **MSstatsTMT-AP** forks. It uses the stable nixpkgs 26.05
+pin from the [MSstatsShiny analysis template](https://github.com/andrew2165/nix-flake-templates/tree/11ea872765d017e822ab66595652ab184f036ca1/msstatsshiny) and
+locks each `-AP` fork to a full GitHub commit.
 
-| R package | GitHub commit |
-| --- | --- |
-| MSstatsAP | `757cde8bb22d5c37356a1aa52bc48c69b929211a` |
-| MSstatsTMTAP | `b9a30b12c4f951f805496e2b43661b7872f0b801` |
-| MSstatsShinyAP | `fdbaca4f54bd1ce174b216e1a21784dcf1739351` |
+| GitHub fork | Installed R package | Pinned commit |
+| --- | --- | --- |
+| [MSstatsShiny-AP](https://github.com/andrew2165/MSstatsShiny-AP) | `MSstatsShinyAP` | `fdbaca4f54bd1ce174b216e1a21784dcf1739351` |
+| [MSstats-AP](https://github.com/andrew2165/MSstats-AP) | `MSstatsAP` | `757cde8bb22d5c37356a1aa52bc48c69b929211a` |
+| [MSstatsTMT-AP](https://github.com/andrew2165/MSstatsTMT-AP) | `MSstatsTMTAP` | `b9a30b12c4f951f805496e2b43661b7872f0b801` |
 
 MSstatsBioNet 1.4.1 and MSstatsResponse 1.2.0 come from Bioconductor 3.23 with fixed source hashes. They supply APIs that MSstatsShinyAP imports. R and the remaining dependencies come from the template's nixpkgs pin.
 

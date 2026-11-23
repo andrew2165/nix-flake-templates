@@ -19,7 +19,7 @@
         };
         msstatsshiny-ap = {
           path = ./msstatsshiny-ap;
-          description = "MSstats Affinity Profiling with MSstatsShinyAP";
+          description = "MSstatsShiny-AP for Affinity Profiling with MSstats-AP and MSstatsTMT-AP";
         };
       };
     in

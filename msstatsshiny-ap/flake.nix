@@ -1,5 +1,5 @@
 {
-  description = "MSstats Affinity Profiling with MSstatsShinyAP";
+  description = "MSstatsShiny-AP for Affinity Profiling with MSstats-AP and MSstatsTMT-AP";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
@@ -231,7 +231,7 @@
           default = {
             type = "app";
             program = "${packages.msstats-shiny}/bin/msstats-shiny";
-            meta.description = "Launch MSstatsShinyAP";
+            meta.description = "Launch MSstatsShiny-AP";
           };
           r = {
             type = "app";
